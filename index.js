@@ -70,17 +70,18 @@ function createRock(x) {
  
  
 function endGame() {
-  clearInterval(gameInterval)
+  while(ROCKS.length > 0){
+    GAME.removeChild(ROCKS[0]);
+    ROCKS.shift();
+  }
 
-  ROCKS.forEach(function(rock) { rock.remove() })
-
-  document.removeEventListener('keydown', moveDodger)
-
+  clearInterval(gameInterval);
+  window.removeEventListener('keydown', moveDodger);
+  alert("YOU LOSE!");
   START.innerHTML = 'Play again?'
   START.style.display = 'inline'
-
-  return alert('YOU LOSE!')
 }
+
 
 function moveDodger(e) {
   const code = e.which
